@@ -21,10 +21,9 @@ public class DemoApplication {
 //
 //		System.out.println(student.getName());
 //		System.out.println(student.getAge());
-
-		ApplicationContext context = SpringApplication.run(DemoApplication.class, args);
-		OrderService orderService = context.getBean(OrderService.class);
-		orderService.placeOrder();
+        ApplicationContext context = SpringApplication.run(DemoApplication.class, args);
+//		OrderService orderService = context.getBean(OrderService.class);
+//		orderService.placeOrder();
 	}
 
 
