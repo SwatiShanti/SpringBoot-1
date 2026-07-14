@@ -91,7 +91,7 @@ public class MyPortfolio {
                 <li><b>Tech Stack:</b> Python, Pandas, NumPy, Machine Learning</li>
             </ul>
 
-            <hr>
+            <hr> 
             """;
     }
 }
