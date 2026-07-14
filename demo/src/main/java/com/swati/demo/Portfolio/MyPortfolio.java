@@ -25,4 +25,18 @@ public class MyPortfolio {
                 </ul>
                 """;
     }
+    @GetMapping("/skills")
+    public String Skills() {
+        return """
+            <h1>My Skills</h1>
+
+            <ul>
+                <li>Languages: Java, Python, C, C++</li>
+                <li>Frameworks: Microservices Architecture, Tailwind CSS</li>
+                <li>Database: MySQL, MongoDB</li>
+                <li>Tools/Platforms: AWS, Azure, Docker, Git, GitHub</li>
+                <li>Soft Skills: Problem Solving, Team Collaboration, Time Management</li>
+            </ul>
+            """;
+    }
 }
