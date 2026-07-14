@@ -39,4 +39,34 @@ public class MyPortfolio {
             </ul>
             """;
     }
+    @GetMapping("/education")
+    public String Education() {
+        return """
+            <h1>Education</h1>
+
+            <ul>
+                <li>
+                    <h3>Lovely Professional University</h3>
+                    <p>B.Tech - Computer Science and Engineering</p>
+                    <p>2023 - 2027</p>
+                </li>
+
+                <br>
+
+                <li>
+                    <h3>R. Lal College, Khagaria</h3>
+                    <p>Intermediate</p>
+                    <p>2022 - 2023</p>
+                </li>
+
+                <br>
+
+                <li>
+                    <h3>Sri Banarasi H.S. School, Khagaria</h3>
+                    <p>Matriculation</p>
+                    <p>2020 - 2021</p>
+                </li>
+            </ul>
+            """;
+    }
 }
