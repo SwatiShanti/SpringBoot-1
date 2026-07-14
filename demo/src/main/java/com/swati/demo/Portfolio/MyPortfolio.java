@@ -69,4 +69,29 @@ public class MyPortfolio {
             </ul>
             """;
     }
+    @GetMapping("/project")
+    public String Project() {
+        return """
+            <h1>Projects</h1>
+
+            <h2>1. AI Mock Interview Platform</h2>
+            <ul>
+                <li>Built an AI-powered mock interview platform using Azure OpenAI.</li>
+                <li>Implemented user authentication and interview history.</li>
+                <li>Generated AI-based interview questions and feedback.</li>
+                <li><b>Tech Stack:</b> HTML, CSS, Azure OpenAI, Vercel</li>
+            </ul>
+
+            <hr>
+
+            <h2>2. Fashion Trend Clothing Recommendation System</h2>
+            <ul>
+                <li>Developed an AI-based clothing recommendation system.</li>
+                <li>Used machine learning and data analysis for personalized suggestions.</li>
+                <li><b>Tech Stack:</b> Python, Pandas, NumPy, Machine Learning</li>
+            </ul>
+
+            <hr>
+            """;
+    }
 }
