@@ -8,27 +8,59 @@ import org.springframework.stereotype.Service;
 @Service
 public class StudentService {
 
-    StudentRepository studentRepository;
-    @Autowired
+    private final StudentRepository studentRepository;
 
+    @Autowired
     public StudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
 
-    public Student studentValidate(Student student){
+    // CREATE
+    public Student studentValidate(Student student) {
+
         int id = student.getId();
         String name = student.getName();
         int age = student.getAge();
         String department = student.getDepartment();
 
-        if(id < 0 || name == null || age < 0 || department == null){
+        if (id < 0 || name == null || age < 0 || department == null) {
             return null;
         }
 
-        studentRepository.save(student);
-        return student;
+        return studentRepository.save(student);
     }
-    public Student getStudentById(int id){
+
+    // GET
+    public Student getStudentById(int id) {
         return studentRepository.findById(id).orElse(null);
+    }
+
+    // UPDATE
+    public Student updateStudent(int id, Student student) {
+
+        Student existingStudent = studentRepository.findById(id).orElse(null);
+
+        if (existingStudent == null) {
+            return null;
+        }
+
+        existingStudent.setName(student.getName());
+        existingStudent.setAge(student.getAge());
+        existingStudent.setDepartment(student.getDepartment());
+
+        return studentRepository.save(existingStudent);
+    }
+
+    // DELETE
+    public boolean deleteStudent(int id) {
+
+        Student existingStudent = studentRepository.findById(id).orElse(null);
+
+        if (existingStudent == null) {
+            return false;
+        }
+
+        studentRepository.delete(existingStudent);
+        return true;
     }
 }
