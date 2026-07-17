@@ -1,4 +1,4 @@
-package com.swati.demo.StudentServer;
+package com.swati.demo.StudentServer.Entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

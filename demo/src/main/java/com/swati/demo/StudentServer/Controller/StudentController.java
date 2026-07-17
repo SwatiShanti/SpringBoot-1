@@ -1,10 +1,10 @@
-package com.swati.demo.StudentServer;
+package com.swati.demo.StudentServer.Controller;
 
+import com.swati.demo.StudentServer.Entity.Student;
+import com.swati.demo.StudentServer.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class StudentController {
@@ -25,6 +25,12 @@ public class StudentController {
         return ResponseEntity.status(201).body(result);
 
 
+}
+@GetMapping("/get/{id}")
+public ResponseEntity<?> getStudentById(@PathVariable int id){
+        Student student = studentService.getStudentById(id);
+
+        return ResponseEntity.status(200).body(student);
 }
 
 
