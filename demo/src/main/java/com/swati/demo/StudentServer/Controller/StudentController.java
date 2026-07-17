@@ -66,6 +66,6 @@ public class StudentController {
             return ResponseEntity.status(404).body("Student not found");
         }
 
-        return ResponseEntity.ok("Student deleted successfully");
+        return ResponseEntity.ok(" deleted successfully");
     }
 }
