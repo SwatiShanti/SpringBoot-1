@@ -18,12 +18,9 @@ public class StudentService {
     // CREATE
     public Student studentValidate(Student student) {
 
-        int id = student.getId();
-        String name = student.getName();
-        int age = student.getAge();
-        String department = student.getDepartment();
-
-        if (id < 0 || name == null || age < 0 || department == null) {
+        if (student.getName() == null || student.getName().isBlank()
+                || student.getDepartment() == null || student.getDepartment().isBlank()
+                || student.getAge() <= 0) {
             return null;
         }
 
