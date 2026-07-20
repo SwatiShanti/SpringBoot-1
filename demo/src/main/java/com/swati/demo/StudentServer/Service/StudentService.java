@@ -1,9 +1,13 @@
 package com.swati.demo.StudentServer.Service;
 
+import com.swati.demo.StudentServer.DTO.CreateStudentRequestDTO;
+import com.swati.demo.StudentServer.DTO.CreateStudentResponseDTO;
 import com.swati.demo.StudentServer.Entity.Student;
 import com.swati.demo.StudentServer.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 @Service
 public class StudentService {
@@ -15,49 +19,68 @@ public class StudentService {
         this.studentRepository = studentRepository;
     }
 
-    // CREATE
-    public Student studentValidate(Student student) {
+    public CreateStudentResponseDTO studentValidate(CreateStudentRequestDTO createStudentRequestDTO) {
 
-        if (student.getName() == null || student.getName().isBlank()
-                || student.getDepartment() == null || student.getDepartment().isBlank()
-                || student.getAge() <= 0) {
-            return null;
-        }
+        Student student = mapToStudent(createStudentRequestDTO);
 
-        return studentRepository.save(student);
+        student = studentRepository.save(student);
+
+        return mapToResponseDTO(student);
     }
 
-    // GET
     public Student getStudentById(int id) {
         return studentRepository.findById(id).orElse(null);
     }
 
-    // UPDATE
     public Student updateStudent(int id, Student student) {
 
-        Student existingStudent = studentRepository.findById(id).orElse(null);
+        Student result = studentRepository.findById(id).orElse(null);
 
-        if (existingStudent == null) {
+        if (result == null) {
             return null;
         }
+        result.setName(student.getName());
+        result.setAge(student.getAge());
+        result.setDepartment(student.getDepartment());
+        result.setUpdatedAt(LocalDateTime.now());
 
-        existingStudent.setName(student.getName());
-        existingStudent.setAge(student.getAge());
-        existingStudent.setDepartment(student.getDepartment());
-
-        return studentRepository.save(existingStudent);
+        return studentRepository.save(result);
     }
 
-    // DELETE
     public boolean deleteStudent(int id) {
 
-        Student existingStudent = studentRepository.findById(id).orElse(null);
+        Student result = studentRepository.findById(id).orElse(null);
 
-        if (existingStudent == null) {
+        if (result == null) {
             return false;
         }
 
-        studentRepository.delete(existingStudent);
+        studentRepository.delete(result);
         return true;
+    }
+
+    private Student mapToStudent(CreateStudentRequestDTO createStudentRequestDTO) {
+
+        Student student = new Student();
+
+        student.setName(createStudentRequestDTO.getName());
+        student.setAge(createStudentRequestDTO.getAge());
+        student.setDepartment(createStudentRequestDTO.getDepartment());
+        student.setCreatedAt(LocalDateTime.now());
+        student.setUpdatedAt(LocalDateTime.now());
+
+        return student;
+    }
+
+    private CreateStudentResponseDTO mapToResponseDTO(Student student) {
+
+        CreateStudentResponseDTO createStudentResponseDTO = new CreateStudentResponseDTO();
+
+        createStudentResponseDTO.setId(student.getId());
+        createStudentResponseDTO.setName(student.getName());
+        createStudentResponseDTO.setAge(student.getAge());
+        createStudentResponseDTO.setDepartment(student.getDepartment());
+
+        return createStudentResponseDTO;
     }
 }

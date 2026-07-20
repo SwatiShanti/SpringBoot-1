@@ -1,11 +1,14 @@
 package com.swati.demo.StudentServer.Controller;
 
+import com.swati.demo.StudentServer.DTO.CreateStudentRequestDTO;
+import com.swati.demo.StudentServer.DTO.CreateStudentResponseDTO;
 import com.swati.demo.StudentServer.Entity.Student;
 import com.swati.demo.StudentServer.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class StudentController {
 
@@ -18,9 +21,9 @@ public class StudentController {
 
     // CREATE
     @PostMapping("/create")
-    public ResponseEntity<Student> storeStudent(@RequestBody Student student) {
+    public ResponseEntity<?> storeStudent(@RequestBody CreateStudentRequestDTO createStudentRequestDTO) {
 
-        Student result = studentService.studentValidate(student);
+        CreateStudentResponseDTO result = studentService.studentValidate(createStudentRequestDTO);
 
         if (result == null) {
             return ResponseEntity.badRequest().body(null);
@@ -66,6 +69,6 @@ public class StudentController {
             return ResponseEntity.status(404).body("Student not found");
         }
 
-        return ResponseEntity.ok(" deleted successfully");
+        return ResponseEntity.ok("Student deleted successfully");
     }
 }

@@ -1,6 +1,8 @@
 package com.swati.demo.StudentServer.Entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -9,17 +11,20 @@ import java.time.LocalDateTime;
 
 @Entity
 public class Student {
+
     @Id
-    int id;
-    String name;
-    int age;
-    String department;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    private String name;
+    private int age;
+    private String department;
 
     @CreationTimestamp
-    LocalDateTime createdAt;
+    private LocalDateTime createdAt;
 
     @UpdateTimestamp
-    LocalDateTime updatedAt;
+    private LocalDateTime updatedAt;
 
     public int getId() {
         return id;
@@ -57,7 +62,15 @@ public class Student {
         return createdAt;
     }
 
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }
