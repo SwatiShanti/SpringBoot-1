@@ -19,6 +19,7 @@ public class StudentService {
         this.studentRepository = studentRepository;
     }
 
+    // CREATE
     public CreateStudentResponseDTO studentValidate(CreateStudentRequestDTO createStudentRequestDTO) {
 
         Student student = mapToStudent(createStudentRequestDTO);
@@ -28,10 +29,12 @@ public class StudentService {
         return mapToResponseDTO(student);
     }
 
+    // GET
     public Student getStudentById(int id) {
         return studentRepository.findById(id).orElse(null);
     }
 
+    // UPDATE
     public Student updateStudent(int id, Student student) {
 
         Student result = studentRepository.findById(id).orElse(null);
@@ -39,14 +42,25 @@ public class StudentService {
         if (result == null) {
             return null;
         }
-        result.setName(student.getName());
-        result.setAge(student.getAge());
-        result.setDepartment(student.getDepartment());
+
+        // Update only Name
+        if (student.getName() != null) {
+            result.setName(student.getName());
+        }
+
+        // Update only Age
+        if (student.getAge() > 0) {
+            result.setAge(student.getAge());
+        }
+
+        // Department will remain unchanged
+
         result.setUpdatedAt(LocalDateTime.now());
 
         return studentRepository.save(result);
     }
 
+    // DELETE
     public boolean deleteStudent(int id) {
 
         Student result = studentRepository.findById(id).orElse(null);
@@ -56,6 +70,7 @@ public class StudentService {
         }
 
         studentRepository.delete(result);
+
         return true;
     }
 

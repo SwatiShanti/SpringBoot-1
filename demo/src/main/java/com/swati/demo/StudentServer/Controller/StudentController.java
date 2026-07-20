@@ -1,7 +1,7 @@
 package com.swati.demo.StudentServer.Controller;
 
-import com.swati.demo.StudentServer.DTO.CreateStudentRequestDTO;
 import com.swati.demo.StudentServer.DTO.CreateStudentResponseDTO;
+import com.swati.demo.StudentServer.DTO.CreateStudentRequestDTO;
 import com.swati.demo.StudentServer.Entity.Student;
 import com.swati.demo.StudentServer.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
