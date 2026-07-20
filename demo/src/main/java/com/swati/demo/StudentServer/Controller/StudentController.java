@@ -1,5 +1,6 @@
 package com.swati.demo.StudentServer.Controller;
 
+import jakarta.validation.Valid;
 import com.swati.demo.StudentServer.DTO.CreateStudentResponseDTO;
 import com.swati.demo.StudentServer.DTO.CreateStudentRequestDTO;
 import com.swati.demo.StudentServer.Entity.Student;
@@ -21,7 +22,8 @@ public class StudentController {
 
     // CREATE
     @PostMapping("/create")
-    public ResponseEntity<?> storeStudent(@RequestBody CreateStudentRequestDTO createStudentRequestDTO) {
+
+    public ResponseEntity<?> storeStudent(@Valid @RequestBody CreateStudentRequestDTO createStudentRequestDTO) {
 
         CreateStudentResponseDTO result = studentService.studentValidate(createStudentRequestDTO);
 
