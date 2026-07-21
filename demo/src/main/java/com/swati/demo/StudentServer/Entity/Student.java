@@ -18,6 +18,7 @@ public class Student {
 
     private String name;
     private int age;
+    private String email;
     private String department;
 
     @CreationTimestamp
@@ -48,6 +49,14 @@ public class Student {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getDepartment() {

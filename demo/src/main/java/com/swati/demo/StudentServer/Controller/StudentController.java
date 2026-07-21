@@ -1,10 +1,10 @@
 package com.swati.demo.StudentServer.Controller;
 
-import jakarta.validation.Valid;
 import com.swati.demo.StudentServer.DTO.CreateStudentRequestDTO;
 import com.swati.demo.StudentServer.DTO.CreateStudentResponseDTO;
 import com.swati.demo.StudentServer.Entity.Student;
 import com.swati.demo.StudentServer.Service.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +25,8 @@ public class StudentController {
     // CREATE
     @PostMapping("/create")
     public ResponseEntity<?> storeStudent(
-            @Valid @RequestBody CreateStudentRequestDTO createStudentRequestDTO) {
+            @Valid @RequestBody CreateStudentRequestDTO createStudentRequestDTO)
+            throws IOException {
 
         CreateStudentResponseDTO result =
                 studentService.studentValidate(createStudentRequestDTO);
@@ -45,8 +46,9 @@ public class StudentController {
 
     // UPDATE
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> updateStudent(@PathVariable int id,
-                                           @RequestBody Student student) {
+    public ResponseEntity<?> updateStudent(
+            @PathVariable int id,
+            @RequestBody Student student) {
 
         Student updatedStudent = studentService.updateStudent(id, student);
 
