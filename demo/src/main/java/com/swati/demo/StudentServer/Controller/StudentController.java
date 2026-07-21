@@ -1,13 +1,15 @@
 package com.swati.demo.StudentServer.Controller;
 
 import jakarta.validation.Valid;
-import com.swati.demo.StudentServer.DTO.CreateStudentResponseDTO;
 import com.swati.demo.StudentServer.DTO.CreateStudentRequestDTO;
+import com.swati.demo.StudentServer.DTO.CreateStudentResponseDTO;
 import com.swati.demo.StudentServer.Entity.Student;
 import com.swati.demo.StudentServer.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -22,27 +24,21 @@ public class StudentController {
 
     // CREATE
     @PostMapping("/create")
+    public ResponseEntity<?> storeStudent(
+            @Valid @RequestBody CreateStudentRequestDTO createStudentRequestDTO) {
 
-    public ResponseEntity<?> storeStudent(@Valid @RequestBody CreateStudentRequestDTO createStudentRequestDTO) {
-
-        CreateStudentResponseDTO result = studentService.studentValidate(createStudentRequestDTO);
-
-        if (result == null) {
-            return ResponseEntity.badRequest().body(null);
-        }
+        CreateStudentResponseDTO result =
+                studentService.studentValidate(createStudentRequestDTO);
 
         return ResponseEntity.status(201).body(result);
     }
 
     // GET BY ID
     @GetMapping("/get/{id}")
-    public ResponseEntity<?> getStudentById(@PathVariable int id) {
+    public ResponseEntity<?> getStudentById(@PathVariable int id)
+            throws IOException {
 
         Student student = studentService.getStudentById(id);
-
-        if (student == null) {
-            return ResponseEntity.status(404).body("Student not found");
-        }
 
         return ResponseEntity.ok(student);
     }

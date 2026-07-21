@@ -7,6 +7,7 @@ import com.swati.demo.StudentServer.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -31,11 +32,15 @@ public class StudentService {
     }
 
     // GET
-    public Student getStudentById(int id) {
-        Optional<Student> student = studentRepository.findById(id);
-        return student.get();
+    public Student getStudentById(int id) throws IOException {
 
-//        return studentRepository.findById(id).orElse(null);
+        Optional<Student> student = studentRepository.findById(id);
+
+        if (student.isEmpty()) {
+            throw new IOException("Student not found");
+        }
+
+        return student.get();
     }
 
     // UPDATE
@@ -47,17 +52,13 @@ public class StudentService {
             return null;
         }
 
-        // Update only Name
         if (student.getName() != null) {
             result.setName(student.getName());
         }
 
-        // Update only Age
         if (student.getAge() > 0) {
             result.setAge(student.getAge());
         }
-
-        // Department will remain unchanged
 
         result.setUpdatedAt(LocalDateTime.now());
 
